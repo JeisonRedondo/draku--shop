@@ -3,12 +3,15 @@ import { AppRoutes } from '../../Routes';
 import { Navbar } from '../../Components/Navbar';
 
 import './App.css';
+import { Layout } from '../../Components/Layout';
 
 function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
       <Navbar />
+      <Layout >
+        <AppRoutes />
+      </Layout>
     </BrowserRouter>
   )
 }
