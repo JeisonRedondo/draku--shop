@@ -12,7 +12,7 @@ function Card({ title, category, image, price, description }) {
           src={image}
           alt={description} />
         <button
-          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1 bg-green-100"
+          className="absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 bg-green-100"
           onClick={() => setCount(count + 1)}
         >+</button>
       </figure>
