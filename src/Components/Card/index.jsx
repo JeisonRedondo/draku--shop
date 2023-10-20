@@ -1,3 +1,4 @@
+import { PlusIcon } from '@heroicons/react/24/solid'
 import { useShoppingCartContext } from "../../Context";
 
 function Card({ title, category, image, price, description }) {
@@ -14,10 +15,10 @@ function Card({ title, category, image, price, description }) {
         <button
           className="absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 bg-green-100"
           onClick={() => setCount(count + 1)}
-        >+</button>
+        ><PlusIcon className="h-6 w-6 text-black"></PlusIcon></button>
       </figure>
       <p className="flex justify-between">
-        <span className="text-sm font-light">{title}</span>
+        <span className="text-sm font-light truncate">{title}</span>
         <span className="text-lg font-medium">${price}</span>
       </p>
     </div>
