@@ -6,6 +6,9 @@ export const ShoppingCartProvider = ({ children }) => {
 
   // Shopping Cart - Increment Quantity
   const [count, setCount] = useState(0);
+
+  //Shopping Cart - Add Products to Cart
+  const [cartProducts, setCartProducts] = useState([]);
   
   // Product Detail - Open/Close
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
@@ -26,6 +29,8 @@ export const ShoppingCartProvider = ({ children }) => {
       setIsProductDetailOpen,
       productToShow,
       setProductToShow,
+      cartProducts,
+      setCartProducts,
     }} >
       {children}
     </ShoppingCartContext.Provider>

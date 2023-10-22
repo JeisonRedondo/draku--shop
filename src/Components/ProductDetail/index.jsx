@@ -15,7 +15,7 @@ export function ProductDetail() {
       <div className="flex justify-between items-center p-2">
         <h2 className="font-medium text-xl">Detail</h2>
         <XMarkIcon
-          className="w-6 h-6 text-black"
+          className="w-6 h-6 text-black cursor-pointer"
           onClick={() => {
             closeProductDetail()
           }}
