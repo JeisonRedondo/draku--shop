@@ -1,11 +1,21 @@
-import { PlusIcon } from '@heroicons/react/24/solid'
+import { PlusIcon } from '@heroicons/react/24/solid';
+import { ShoppingCartContext } from '../../Context';
 import { useShoppingCartContext } from "../../Context";
+import { useContext } from 'react';
 
 function Card({ title, category, image, price, description }) {
 
-  const { setCount, count } = useShoppingCartContext();
+  const { setCount, count , openProductDetail } = useShoppingCartContext();
+  
   return (
-    <div className="bg-white cursor-pointer w-56 h-60 rounded-lg">
+    
+    <div 
+    className="bg-white cursor-pointer w-56 h-60 rounded-lg"
+    onClick={() => {
+      openProductDetail()
+    }
+    }
+    >
       <figure className="relative mb-3 w-full h-4/5">
         <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 p-1">{category}</span>
         <img
@@ -22,6 +32,7 @@ function Card({ title, category, image, price, description }) {
         <span className="text-lg font-medium">${price}</span>
       </p>
     </div>
+    
   )
 };
 
