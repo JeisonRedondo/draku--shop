@@ -5,6 +5,7 @@ import { ShoppingCartProvider } from '../../Context';
 
 import './App.css';
 import { Layout } from '../../Components/Layout';
+import { CheckoutSideMenu } from '../../Components/CheckoutSideMenu';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Layout >
           <AppRoutes />
         </Layout>
+        <CheckoutSideMenu/>
       </BrowserRouter>
     </ShoppingCartProvider>
   )

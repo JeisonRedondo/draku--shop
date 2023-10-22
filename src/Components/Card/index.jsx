@@ -1,16 +1,18 @@
 import { PlusIcon } from '@heroicons/react/24/solid';
 import { ShoppingCartContext } from '../../Context';
 import { useShoppingCartContext } from "../../Context";
+import { useEffect } from 'react';
 
 function Card({ title, category, image, price, description }) {
 
-  const { 
-    setCount, 
-    count, 
-    openProductDetail, 
+  const {
+    setCount,
+    count,
+    openProductDetail,
     setProductToShow,
     setCartProducts,
-    cartProducts, 
+    cartProducts,
+    openCheckoutSideMenu,
   } = useShoppingCartContext();
 
   function showProduct(productDetail) {
@@ -18,10 +20,16 @@ function Card({ title, category, image, price, description }) {
     setProductToShow(productDetail);
   };
 
-  function addProductsToCart (productData){
-    setCartProducts([...cartProducts,productData]);
-    console.log("Show Cart: ",cartProducts);
+  function addProductsToCart(event, productData) {
+
+    event.stopPropagation();
+
+    setCount(count + 1);
+    setCartProducts([...cartProducts, productData]);
+    
+    openCheckoutSideMenu();
   };
+
 
   return (
 
@@ -40,11 +48,7 @@ function Card({ title, category, image, price, description }) {
           alt={description} />
         <button
           className="absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 bg-green-100 hover:bg-purple-700"
-          onClick={(event) => {
-            event.stopPropagation();
-            setCount(count + 1);
-            addProductsToCart({ title, category, image, price, description });
-          }}
+          onClick={(event) => addProductsToCart(event, { title, category, image, price, description })}
         ><PlusIcon
           className="h-6 w-6 text-black"
         ></PlusIcon></button>
