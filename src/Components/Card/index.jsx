@@ -25,7 +25,7 @@ function Card({ id, title, category, image, price, description }) {
     event.stopPropagation();
 
     setCount(count + 1);
-    setCartProducts([...cartProducts, productData]);
+    setCartProducts([...cartProducts,{ ...productData,quantity:1}]);
 
     openCheckoutSideMenu();
   };
