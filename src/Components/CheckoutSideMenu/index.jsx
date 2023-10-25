@@ -1,6 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useShoppingCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
+import { totalPrice } from "../../utils";
 
 export function CheckoutSideMenu() {
 
@@ -27,6 +28,12 @@ export function CheckoutSideMenu() {
                         <OrderCard key={product.id} {...product} />
                     ))
                 }
+            </div>
+            <div className="px-4">
+                <p className="flex justify-between items-center">
+                    <span className="font-light">Total:</span>
+                    <span className="font-medium text-2xl">${totalPrice(cartProducts)}</span>
+                </p>
             </div>
         </aside>
     )
