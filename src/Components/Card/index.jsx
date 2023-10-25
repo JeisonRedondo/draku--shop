@@ -3,7 +3,9 @@ import { CheckIcon } from '@heroicons/react/24/solid';
 import { useShoppingCartContext } from "../../Context";
 
 
-function Card({ id, title, category, image, price, description }) {
+function Card(props) {
+
+  const { id, title, category, image, price, description } = props;
 
   const {
     setCount,
@@ -30,6 +32,8 @@ function Card({ id, title, category, image, price, description }) {
     openCheckoutSideMenu();
   };
 
+  
+
   function renderIcon() {
     const isInCart = cartProducts.some(product => product.id === id);
 
@@ -47,7 +51,7 @@ function Card({ id, title, category, image, price, description }) {
         (
           <button
             className="absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 bg-green-100 hover:bg-purple-700"
-            onClick={(event) => addProductsToCart(event, { id, title, category, image, price, description })}
+            onClick={(event) => addProductsToCart(event, props)}
           >
             <PlusIcon className="h-6 w-6 text-black" />
           </button>
@@ -58,10 +62,10 @@ function Card({ id, title, category, image, price, description }) {
   return (
 
     <div
-      className="bg-white cursor-pointer w-56 h-60 rounded-lg"
+      className="bg-white cursor-pointer w-48 h-60 rounded-lg border border-black p-2 shadow-lg shadow-blue-500/40"
       onClick={() => {
         showProduct({ title, category, image, price, description })
-      }
+        }
       }
     >
       <figure className="relative mb-3 w-full h-4/5">
@@ -73,7 +77,7 @@ function Card({ id, title, category, image, price, description }) {
         {renderIcon()}
       </figure>
       <p className="flex justify-between">
-        <span className="text-sm font-light truncate">{title}</span>
+        <span className="text-xs font-normal line-clamp-2 ">{title}</span>
         <span className="text-lg font-medium">${price}</span>
       </p>
     </div>

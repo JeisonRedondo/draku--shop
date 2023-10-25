@@ -1,7 +1,9 @@
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { TrashIcon } from "@heroicons/react/24/solid";
 import { useShoppingCartContext } from "../../Context";
 
-export function OrderCard({id, title, image, price, quantity }) {
+export function OrderCard(props) {
+
+    const {id, title, image, price, quantity } = props;
 
     const {cartProducts, setCartProducts } = useShoppingCartContext();
 
@@ -20,6 +22,11 @@ export function OrderCard({id, title, image, price, quantity }) {
         newCartProducts[decreasedProducts].quantity>1?newCartProducts[decreasedProducts].quantity--:false;
         setCartProducts(newCartProducts);
 
+    };
+
+    function deleteProductsOfCart (){
+        const filteredProducts = cartProducts.filter((product) => product.id != id);
+        setCartProducts(filteredProducts);
     }
 
     return (
@@ -31,7 +38,7 @@ export function OrderCard({id, title, image, price, quantity }) {
                         src={image}
                         alt={title} />
                 </figure>
-                <p className="text-sm font-light ">{title}</p>
+                <p className="text-sm font-light line-clamp-2">{title}</p>
             </div>
             <div className="flex items-center gap-2">
                 <div>
@@ -42,12 +49,13 @@ export function OrderCard({id, title, image, price, quantity }) {
                     <button
                     onClick={()=> decreasedProducts()}
                     >-</button>
+                
                 </div>
                 <p className="text-lg font-medium">{price}</p>
-                <XMarkIcon
+                <TrashIcon
                     className="w-6 h-6 text-black cursor-pointer"
-
-                ></XMarkIcon>
+                    onClick={()=>deleteProductsOfCart()}
+                ></TrashIcon>
             </div>
         </div>
     )

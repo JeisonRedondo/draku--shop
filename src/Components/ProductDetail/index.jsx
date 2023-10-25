@@ -35,7 +35,7 @@ export function ProductDetail() {
         <p className="flex flex-col p-6">
           <span className="font-medium text-2xl">${productToShow.price}</span>
           <span className="font-medium text-md">{productToShow.title}</span>
-          <span className="font-light text-md truncate">{productToShow.description}</span>
+          <span className="font-light text-md">{productToShow.description}</span>
         </p>
       </div>
     </aside>
