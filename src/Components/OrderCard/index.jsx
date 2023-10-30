@@ -22,7 +22,7 @@ export function OrderCard(props) {
         const decreasedProducts = cartProducts.findIndex((item)=> item.id == id);
         const newCartProducts = [...cartProducts]
         newCartProducts[decreasedProducts].quantity>1?newCartProducts[decreasedProducts].quantity--:false;
-        newCartProducts[decreasedProducts].quantity>=1?setCount(count - 1):false;
+        newCartProducts[decreasedProducts].quantity>1?setCount(count - 1):false;
         setCartProducts(newCartProducts);
     };
 
