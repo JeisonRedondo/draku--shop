@@ -5,31 +5,54 @@ import { useEffect } from "react";
 
 export function OrderCard(props) {
 
-    const {id, title, image, price, quantity } = props;
+    const { id, title, image, price, quantity } = props;
 
-    const {cartProducts, setCartProducts, setCount, count} = useShoppingCartContext();
+    const { cartProducts, setCartProducts, setCount, count } = useShoppingCartContext();
 
-    function increasedProducts (){
-        const increasedProducts = cartProducts.findIndex((item)=> item.id == id);
+    function increasedProducts() {
+        const increasedProducts = cartProducts.findIndex((item) => item.id == id);
         const newCartProducts = [...cartProducts]
         newCartProducts[increasedProducts].quantity++
-        
+
         setCartProducts(newCartProducts);
         setCount(count + 1);
     };
 
-    function decreasedProducts (){
-        const decreasedProducts = cartProducts.findIndex((item)=> item.id == id);
+    function decreasedProducts() {
+        const decreasedProducts = cartProducts.findIndex((item) => item.id == id);
         const newCartProducts = [...cartProducts]
-        newCartProducts[decreasedProducts].quantity>1?newCartProducts[decreasedProducts].quantity--:false;
-        newCartProducts[decreasedProducts].quantity>1?setCount(count - 1):false;
+        newCartProducts[decreasedProducts].quantity > 1 ? newCartProducts[decreasedProducts].quantity-- : false;
+        newCartProducts[decreasedProducts].quantity > 1 ? setCount(count - 1) : false;
         setCartProducts(newCartProducts);
     };
 
-    function deleteProductsOfCart (){
+    function deleteProductsOfCart() {
         const filteredProducts = cartProducts.filter((product) => product.id != id);
         setCartProducts(filteredProducts);
         setCount(count - 1);
+    }
+
+    let renderTrashIcon
+
+    if (count > 0) {
+        renderTrashIcon = (
+        <>
+        <div>
+            <button
+                onClick={() => increasedProducts()}
+            >+</button>
+            <p>{quantity}</p>
+            <button
+                onClick={() => decreasedProducts()}
+            >-</button>
+
+        </div>
+        <TrashIcon
+            className="w-6 h-6 text-black cursor-pointer"
+            onClick={() => deleteProductsOfCart()}
+        ></TrashIcon>
+        </>
+        )
     }
 
     return (
@@ -44,21 +67,11 @@ export function OrderCard(props) {
                 <p className="text-sm font-light line-clamp-2">{title}</p>
             </div>
             <div className="flex items-center gap-2">
-                <div>
-                    <button
-                        onClick={()=> increasedProducts()}
-                    >+</button>
-                    <p>{quantity}</p>
-                    <button
-                    onClick={()=> decreasedProducts()}
-                    >-</button>
-                
-                </div>
                 <p className="text-lg font-medium">{price}</p>
-                <TrashIcon
-                    className="w-6 h-6 text-black cursor-pointer"
-                    onClick={()=>deleteProductsOfCart()}
-                ></TrashIcon>
+
+                {
+                    renderTrashIcon
+                }
             </div>
         </div>
     )
