@@ -8,16 +8,15 @@ function MyOrders() {
 
   return (
     <div>
-        <h1>My Orders</h1>
+      <h1>My Orders</h1>
       {
-        order.map((item, index) => {
-          <Link to={`/my-orders/${item.id}`}>
+        order.map((item, index) => (
+          <Link key={index} to={`/my-orders/${index}`}>
             <OrdersCard
-              key={index}
               {...item}
             />
           </Link>
-        })
+        ))
       }
     </div>
   )
