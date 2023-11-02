@@ -4,7 +4,31 @@ import { useShoppingCartContext } from "../../Context";
 
 function Home() {
 
-  const { items, setSearchByTitle } = useShoppingCartContext();
+  const { items, searchByTitle, setSearchByTitle, filteredItemsByTitle } = useShoppingCartContext();
+
+
+
+
+  function renderItems() {
+    let itemsToRender = searchByTitle?.length > 0
+      ? filteredItemsByTitle(items, searchByTitle)
+      : items;
+
+    return (
+      itemsToRender?.length > 0 ?
+        (
+          itemsToRender?.map((item) => (
+            <Card key={item.id} {...item} />
+          ))
+        )
+        :
+        (
+          <p>
+            No Results Found
+          </p>
+        )
+    )
+  }
 
   return (
     <div>
@@ -19,9 +43,7 @@ function Home() {
       />
       <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 w-ful max-w-screen-lg">
         {
-          items?.map((item) => (
-            <Card key={item.id} {...item} />
-          ))
+          renderItems()
         }
       </div>
       <ProductDetail />

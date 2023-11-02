@@ -11,8 +11,6 @@ export function CheckoutSideMenu() {
 
   let dateOfCheckout = dateTime();
 
-  console.log(dateOfCheckout);
-
   function handleCheckout() {
     const orderToAdd = {
       date: dateOfCheckout,

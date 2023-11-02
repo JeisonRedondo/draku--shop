@@ -17,9 +17,11 @@ export const ShoppingCartProvider = ({ children }) => {
   // Get <Products  
   const [items, setItems] = useState(null);
 
+  const [filteredItems, setFilteredItems] = useState(null);
+
   //Get products by title
   const [searchByTitle, setSearchByTitle] = useState("");
-  console.log("search by title: ", searchByTitle);
+
   useEffect(() => {
 
     const fetchProps = async () => {
@@ -36,6 +38,10 @@ export const ShoppingCartProvider = ({ children }) => {
     fetchProps();
   }, []);
 
+  function filteredItemsByTitle(items, searchByTitle) {
+    let filteredArray = items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()));
+    return filteredArray;
+  };
 
 
   // Product Detail - Open/Close
@@ -73,6 +79,7 @@ export const ShoppingCartProvider = ({ children }) => {
       setItems,
       searchByTitle,
       setSearchByTitle,
+      filteredItemsByTitle,
     }} >
       {children}
     </ShoppingCartContext.Provider>
