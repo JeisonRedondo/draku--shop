@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { API_URL } from "../API";
 
 export const ShoppingCartContext = createContext();
 
@@ -11,22 +12,45 @@ export const ShoppingCartProvider = ({ children }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
   //Shopping Cart- Order
-  const [order,setOrder] = useState([]);
+  const [order, setOrder] = useState([]);
 
-  
+  // Get <Products  
+  const [items, setItems] = useState(null);
+
+  //Get products by title
+  const [searchByTitle, setSearchByTitle] = useState("");
+  console.log("search by title: ", searchByTitle);
+  useEffect(() => {
+
+    const fetchProps = async () => {
+      try {
+
+        const response = await fetch(`${API_URL}/products`);
+        const props = await response.json();
+        setItems(props)
+
+      } catch (error) {
+        console.error(`Ah ocurrido un error:${error}`)
+      }
+    }
+    fetchProps();
+  }, []);
+
+
+
   // Product Detail - Open/Close
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
-  function openProductDetail(){ setIsProductDetailOpen(true)}
-  function closeProductDetail (){ setIsProductDetailOpen(false)}
-  
+  function openProductDetail() { setIsProductDetailOpen(true) }
+  function closeProductDetail() { setIsProductDetailOpen(false) }
+
   // Produc Detail - Show Product
 
-  const [ productToShow, setProductToShow ] = useState({})
+  const [productToShow, setProductToShow] = useState({})
 
- // CheckoutSideMenu - Open/Close
- const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
- function openCheckoutSideMenu(){ setIsCheckoutSideMenuOpen(true)}
- function closeCheckoutSideMenu (){ setIsCheckoutSideMenuOpen(false)}
+  // CheckoutSideMenu - Open/Close
+  const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
+  function openCheckoutSideMenu() { setIsCheckoutSideMenuOpen(true) }
+  function closeCheckoutSideMenu() { setIsCheckoutSideMenuOpen(false) }
 
   return (
     <ShoppingCartContext.Provider value={{
@@ -45,6 +69,10 @@ export const ShoppingCartProvider = ({ children }) => {
       closeCheckoutSideMenu,
       order,
       setOrder,
+      items,
+      setItems,
+      searchByTitle,
+      setSearchByTitle,
     }} >
       {children}
     </ShoppingCartContext.Provider>
