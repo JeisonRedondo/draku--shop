@@ -17,8 +17,6 @@ export const ShoppingCartProvider = ({ children }) => {
   // Get <Products  
   const [items, setItems] = useState(null);
 
-  const [filteredItems, setFilteredItems] = useState(null);
-
   //Get products by title
   const [searchByTitle, setSearchByTitle] = useState("");
 
@@ -43,6 +41,10 @@ export const ShoppingCartProvider = ({ children }) => {
     return filteredArray;
   };
 
+  function filteredItemsByCategory(items) {
+    let filteredArray = items?.filter(item => item.category.toLowerCase() === "electronics");
+    return filteredArray;
+  };
 
   // Product Detail - Open/Close
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
@@ -80,6 +82,7 @@ export const ShoppingCartProvider = ({ children }) => {
       searchByTitle,
       setSearchByTitle,
       filteredItemsByTitle,
+      filteredItemsByCategory,
     }} >
       {children}
     </ShoppingCartContext.Provider>

@@ -1,15 +1,17 @@
-import { Card } from "../../Components/Card";
-import { ProductDetail } from "../../Components/ProductDetail";
 import { useShoppingCartContext } from "../../Context";
+import { ProductDetail } from "../../Components/ProductDetail";
+import { Card } from "../../Components/Card";
 
-function Home() {
+function Electronics() {
 
-  const { items, searchByTitle, setSearchByTitle, filteredItemsByTitle } = useShoppingCartContext();
+  const { items, searchByTitle, setSearchByTitle, filteredItemsByTitle, filteredItemsByCategory } = useShoppingCartContext();
+
+  const itemsByCategory = filteredItemsByCategory(items);
 
   function renderItems() {
     let itemsToRender = searchByTitle?.length > 0
-      ? filteredItemsByTitle(items, searchByTitle)
-      : items;
+      ? filteredItemsByTitle(itemsByCategory, searchByTitle)
+      : itemsByCategory;
 
     return (
       itemsToRender?.length > 0 ?
@@ -30,7 +32,7 @@ function Home() {
   return (
     <div>
       <div className="flex items-center justify-center relative w-full mb-4">
-        <h1 className="font-medium text-xl">Exclusive Products</h1>
+        <h1 className="font-medium text-xl">Electronics</h1>
       </div>
       <input
         type="text"
@@ -41,11 +43,10 @@ function Home() {
       <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 w-ful max-w-screen-lg">
         {
           renderItems()
-        }
-      </div>
+        }      </div>
       <ProductDetail />
     </div>
   )
 }
 
-export { Home };
+export { Electronics };
