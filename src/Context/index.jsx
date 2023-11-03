@@ -41,8 +41,8 @@ export const ShoppingCartProvider = ({ children }) => {
     return filteredArray;
   };
 
-  function filteredItemsByCategory(items) {
-    let filteredArray = items?.filter(item => item.category.toLowerCase() === "electronics");
+  function filteredItemsByCategory(items, category) {
+    let filteredArray = items?.filter(item => item.category.toLowerCase() === category);
     return filteredArray;
   };
 

@@ -8,10 +8,12 @@ import { NotFound } from '../Pages/NotFound/';
 import { SignIn } from '../Pages/SignIn';
 import { Electronics } from '../Pages/Electronics';
 
+
 function AppRoutes() {
   let routes = useRoutes([
     { path: '/', element: <Home /> },
     { path: '/electronics', element: <Electronics /> },
+    { path: '/category/:category', element: <Home /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
     { path: '/my-orders', element: <MyOrders /> },

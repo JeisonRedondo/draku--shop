@@ -1,20 +1,30 @@
+import { useParams } from "react-router-dom";
 import { Card } from "../../Components/Card";
 import { ProductDetail } from "../../Components/ProductDetail";
 import { useShoppingCartContext } from "../../Context";
 
 function Home() {
 
-  const { items, searchByTitle, setSearchByTitle, filteredItemsByTitle } = useShoppingCartContext();
+  const { items, searchByTitle, setSearchByTitle, filteredItemsByTitle, filteredItemsByCategory } = useShoppingCartContext();
+
+  const params = useParams();
+  const category = params.category;
+
+  const page = category ? category : "Exclusive Products";
+  const pageTitle = page.charAt(0).toUpperCase() + page.slice(1);
+
+
+  const itemsToRender = params.category ? filteredItemsByCategory(items, category) : items;
 
   function renderItems() {
-    let itemsToRender = searchByTitle?.length > 0
-      ? filteredItemsByTitle(items, searchByTitle)
-      : items;
+    let itemsSearched = searchByTitle?.length > 0
+      ? filteredItemsByTitle(itemsToRender, searchByTitle)
+      : itemsToRender;
 
     return (
-      itemsToRender?.length > 0 ?
+      itemsSearched?.length > 0 ?
         (
-          itemsToRender?.map((item) => (
+          itemsSearched?.map((item) => (
             <Card key={item.id} {...item} />
           ))
         )
@@ -26,11 +36,10 @@ function Home() {
         )
     )
   }
-
   return (
     <div>
       <div className="flex items-center justify-center relative w-full mb-4">
-        <h1 className="font-medium text-xl">Exclusive Products</h1>
+        <h1 className="font-medium text-xl">{pageTitle}</h1>
       </div>
       <input
         type="text"
