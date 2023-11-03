@@ -37,16 +37,18 @@ function Home() {
     )
   }
   return (
-    <div>
-      <div className="flex items-center justify-center relative w-full mb-4">
+    <div >
+      <div className="flex flex-col items-center justify-center relative w-full mb-4">
         <h1 className="font-medium text-xl">{pageTitle}</h1>
+
+        <input
+          type="text"
+          placeholder="Search a products"
+          value={searchByTitle}
+          className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"
+          onChange={(event) => setSearchByTitle(event.target.value)}
+        />
       </div>
-      <input
-        type="text"
-        placeholder="Search a products"
-        className="rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none"
-        onChange={(event) => setSearchByTitle(event.target.value)}
-      />
       <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 w-ful max-w-screen-lg">
         {
           renderItems()
