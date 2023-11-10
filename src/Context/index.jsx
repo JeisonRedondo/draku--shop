@@ -5,6 +5,12 @@ export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
 
+  //Account
+  const [account, setAccount] = useState({});
+
+  //Sign out
+  const [signOut, setSignOut] = useState(false);
+
   // Shopping Cart - Increment Quantity
   const [count, setCount] = useState(0);
 
@@ -14,12 +20,13 @@ export const ShoppingCartProvider = ({ children }) => {
   //Shopping Cart- Order
   const [order, setOrder] = useState([]);
 
-  // Get <Products  
+  // Get Products  
   const [items, setItems] = useState(null);
 
   //Get products by title
   const [searchByTitle, setSearchByTitle] = useState("");
 
+  // Call to API fakestore.api
   useEffect(() => {
 
     const fetchProps = async () => {
@@ -35,6 +42,13 @@ export const ShoppingCartProvider = ({ children }) => {
     }
     fetchProps();
   }, []);
+
+  //Handle SignOut
+  function handleSignOut() {
+    const stringifiedSignOut = JSON.stringify(!signOut);
+    localStorage.setItem('sign-out', stringifiedSignOut);
+    setSignOut(!signOut);
+  };
 
   function filteredItemsByTitle(items, searchByTitle) {
     let filteredArray = items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()));
@@ -52,7 +66,6 @@ export const ShoppingCartProvider = ({ children }) => {
   function closeProductDetail() { setIsProductDetailOpen(false) }
 
   // Produc Detail - Show Product
-
   const [productToShow, setProductToShow] = useState({})
 
   // CheckoutSideMenu - Open/Close
@@ -83,6 +96,11 @@ export const ShoppingCartProvider = ({ children }) => {
       setSearchByTitle,
       filteredItemsByTitle,
       filteredItemsByCategory,
+      account,
+      setAccount,
+      signOut,
+      setSignOut,
+      handleSignOut,
     }} >
       {children}
     </ShoppingCartContext.Provider>

@@ -3,8 +3,63 @@ import { NavLink } from "react-router-dom";
 import { useShoppingCartContext } from "../../Context";
 
 function Navbar() {
-  const { count } = useShoppingCartContext();
+  const { count, handleSignOut, signOut } = useShoppingCartContext();
   const activeStyle = 'underline underline-offset-4';
+
+  function renderNavLinksView() {
+    if (signOut === true) {
+      return (
+        <li>
+          <NavLink
+            to="/sign-in"
+            className={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }
+            onClick={() => handleSignOut()}
+          >Sign in
+          </NavLink>
+        </li>
+      )
+    } else {
+      return (<>
+        <li className="text-black/60">
+          draku@drakunom.com
+        </li>
+        <li>
+          <NavLink
+            to='/my-orders'
+            className={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }
+          >
+            My Orders
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to='/my-account'
+            className={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }
+          >
+            My Account
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to='/'
+            className={({ isActive }) =>
+              isActive ? activeStyle : undefined
+            }
+            onClick={() => handleSignOut()}
+          >
+            Sign Out
+          </NavLink>
+        </li>
+      </>
+      )
+    }
+  };
 
   return (
     <nav
@@ -71,39 +126,9 @@ function Navbar() {
         </li>
       </ul>
       <ul className="flex items-center gap-3">
-        <li className="text-black/60">
-          draku@drakunom.com
-        </li>
-        <li>
-          <NavLink
-            to='/my-orders'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
-          >
-            My Orders
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/my-account'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
-          >
-            My Account
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/signin'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined
-            }
-          >
-            Sign In
-          </NavLink>
-        </li>
+        {
+          renderNavLinksView()
+        }
         <li className="flex ">
           <ShoppingCartIcon className="w-5 h-6 text-black"></ShoppingCartIcon>
           {count}
