@@ -59,7 +59,7 @@ function Navbar() {
       </>
       )
     }
-  };
+  }
 
   return (
     <nav
@@ -111,7 +111,7 @@ function Navbar() {
               isActive ? activeStyle : undefined
             }
           >
-            Men's Clothing
+            Men&apos;s Clothing
           </NavLink>
         </li>
         <li>
@@ -121,7 +121,7 @@ function Navbar() {
               isActive ? activeStyle : undefined
             }
           >
-            Women's Clothing
+            Women&apos;s Clothing
           </NavLink>
         </li>
       </ul>
@@ -137,6 +137,6 @@ function Navbar() {
 
     </nav>
   )
-};
+}
 
 export { Navbar };
