@@ -1,15 +1,16 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { API_URL } from "../API";
+import { Storage } from "../utils/storage";
 
 export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
 
   //Account
-  const [account, setAccount] = useState({});
+  const [account, setAccount] = useState(Storage.getItem('account')?.signOut);
 
   //Sign out
-  const [signOut, setSignOut] = useState(false);
+  const [signOut, setSignOut] = useState(Storage.getItem('sign-out')?.signOut);
 
   // Shopping Cart - Increment Quantity
   const [count, setCount] = useState(0);
