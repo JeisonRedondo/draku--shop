@@ -10,7 +10,7 @@ export function ProductDetail() {
   return (
 
     <aside
-      className={`top-[50px] right-0 bottom-0 w-[360px] h-[calc(100vh-60px)] ${isProductDetailOpen ? 'flex' : 'hidden'} flex-col fixed  border border-black rounded-lg bg-white overflow-y-scroll `}
+      className={`top-[60px] right-0 bottom-0 w-[360px] h-[calc(100vh-65px)] ${isProductDetailOpen ? 'flex' : 'hidden'} flex-col fixed  border border-black rounded-lg bg-white overflow-y-scroll `}
     >
       <div className="flex justify-between items-center p-2 ">
         <h2 className="font-medium text-xl">Detail</h2>
