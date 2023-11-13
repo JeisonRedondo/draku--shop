@@ -1,19 +1,14 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { API_URL } from "../API";
-import { Storage } from "../utils/storage";
 
 export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
-
-  const [view, setView] = useState('user-info');
-
   //Account
-  const [account, setAccount] = useState(Storage.getItem("account")?.signOut);
+  const [account, setAccount] = useState({});
 
   //Sign out
   const [signOut, setSignOut] = useState(true);
-  Storage.setItem('sign-out',true);
 
   // Shopping Cart - Increment Quantity
   const [count, setCount] = useState(0);
@@ -43,13 +38,6 @@ export const ShoppingCartProvider = ({ children }) => {
     };
     fetchProps();
   }, []);
-
-  //Handle SignOut
-  function handleSignOut() {
-    const stringifiedSignOut = JSON.stringify(!signOut);
-    localStorage.setItem("sign-out", stringifiedSignOut);
-    setSignOut(!signOut);
-  }
 
   function filteredItemsByTitle(items, searchByTitle) {
     let filteredArray = items?.filter((item) =>
@@ -114,9 +102,6 @@ export const ShoppingCartProvider = ({ children }) => {
         setAccount,
         signOut,
         setSignOut,
-        handleSignOut,
-        view,
-        setView,
       }}
     >
       {children}

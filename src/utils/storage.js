@@ -9,18 +9,17 @@ const Storage = {
     let data = localStorage.getItem(key)
     return JSON.parse(data)
   },
-  itemInStorage:(keyItem, dataOfState) => {
+  itemInStorage:(keyItem ,data) => {
     const itemInLocal = localStorage.getItem(keyItem)
-    console.log("Item in local: ",itemInLocal)
 
     const parsedItem = JSON.parse(itemInLocal)
-    
-    console.log("Item in state: ",dataOfState)
 
     const noItemInLocal = parsedItem ? Object.keys(parsedItem).length === 0 : true ;
-    const noItemInState = dataOfState ? Object.keys(dataOfState).length === 0 :true;
+    console.log("No item in Local: ",noItemInLocal)
+    const noItemInState = data ? Object.keys(data).length === 0 :true;
+    console.log("No item in state: ",noItemInState)
     const hasItemLocalAndState = !noItemInLocal || !noItemInState;
-
+    console.log("Has item local and state: ",hasItemLocalAndState)
     return hasItemLocalAndState;
   },
 };
